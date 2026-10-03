@@ -1,0 +1,20 @@
+{
+  "name": "manwha-rank-site",
+  "version": "1.0.0",
+  "description": "Site public de classement de manwhas avec gestion d'accès restreinte",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.28.0",
+    "express-validator": "^7.0.0",
+    "helmet": "^8.0.0",
+    "sqlite3": "^5.1.7"
+  }
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manwha Rank</title>
+    <meta
+      name="description"
+      content="Classement de manwhas, suivi des abandons, et gestion des titres à venir ou à analyser."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div>
+          <p class="eyebrow">Classement</p>
+          <h1>Manwha Rank</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="loginToggle" class="secondary-button">Connexion</button>
+          <button id="logoutButton" class="secondary-button hidden">Déconnexion</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Suivi personnel</p>
+          <h2>Un classement de manwhas organisé et sécurisé</h2>
+          <p class="hero-text">
+            Lecture, à venir, abandon, introuvable, analyse des titres en dessous de 30 chapitres et à analyser.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span id="statLecture">0</span>
+            <small>Lecture</small>
+          </div>
+          <div class="stat-card">
+            <span id="statAbandon">0</span>
+            <small>Abandons</small>
+          </div>
+          <div class="stat-card">
+            <span id="statAnalyse">0</span>
+            <small>Analyse</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="filter-panel">
+        <div class="filter-chips" id="filterChips"></div>
+      </section>
+
+      <section id="loginPanel" class="panel hidden">
+        <h3>Connexion</h3>
+        <form id="loginForm" class="stack-form">
+          <label>
+            Nom d’utilisateur
+            <input type="text" name="username" placeholder="admin" required />
+          </label>
+          <label>
+            Mot de passe
+            <input type="password" name="password" placeholder="••••••••" required />
+          </label>
+          <button type="submit" class="primary-button">Se connecter</button>
+        </form>
+      </section>
+
+      <section id="adminPanel" class="panel hidden">
+        <div class="panel-header">
+          <h3>Administration</h3>
+          <span id="adminBadge" class="badge">Éditeur</span>
+        </div>
+
+        <div class="admin-grid">
+          <div>
+            <h4>Ajouter / modifier</h4>
+            <form id="manhwaForm" class="stack-form">
+              <input type="hidden" id="manhwaId" />
+
+              <label>
+                Titre
+                <input type="text" id="titleInput" required />
+              </label>
+
+              <label>
+                Genre
+                <select id="genreInput">
+                  <option value="Isekai">Isekai</option>
+                  <option value="Monde moderne">Monde moderne</option>
+                  <option value="Murim">Murim</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </label>
+
+              <label>
+                Nombre de chapitres
+                <input type="number" id="chapterInput" min="0" value="0" />
+              </label>
+
+              <label>
+                Statut
+                <select id="statusInput">
+                  <option value="reading">Lecture</option>
+                  <option value="upcoming">À venir</option>
+                  <option value="missing">Introuvable</option>
+                  <option value="abandoned_translation">Abandon team trad</option>
+                  <option value="abandoned_creator">Abandon créateur</option>
+                  <option value="abandoned_manual">Abandon manuel</option>
+                  <option value="analysis_under_30">Analyse -30 chapitres</option>
+                  <option value="to_analyze">À analyser</option>
+                  <option value="finished">Terminé</option>
+                </select>
+              </label>
+
+              <label>
+                Image (URL)
+                <input type="url" id="coverInput" placeholder="https://..." />
+              </label>
+
+              <label>
+                Description personnelle
+                <textarea id="descriptionInput" rows="4" placeholder="Votre avis sur ce manwha..."></textarea>
+              </label>
+
+              <label>
+                Notes / observations
+                <textarea id="notesInput" rows="3" placeholder="Notes internes..."></textarea>
+              </label>
+
+              <div class="button-row">
+                <button type="submit" class="primary-button" id="submitManhwaBtn">Ajouter</button>
+                <button type="button" class="secondary-button" id="cancelEditBtn">Annuler</button>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h4>Créer un compte modérateur</h4>
+            <form id="userForm" class="stack-form">
+              <label>
+                Nom d’utilisateur
+                <input type="text" id="newUserName" required />
+              </label>
+              <label>
+                Mot de passe
+                <input type="password" id="newUserPassword" required />
+              </label>
+              <label>
+                Rôle
+                <select id="newUserRole">
+                  <option value="editor">Éditeur</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </label>
+              <button type="submit" class="primary-button">Créer compte</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="manhwaBoard" class="board"></section>
+    </main>
+
+    <template id="cardTemplate">
+      <article class="card">
+        <img class="cover" alt="couverture du manwha" />
+        <div class="card-body">
+          <div class="card-head">
+            <h3 class="title"></h3>
+            <span class="status-pill"></span>
+          </div>
+          <p class="meta"></p>
+          <p class="description"></p>
+          <div class="notes-box"></div>
+          <div class="card-actions hidden">
+            <button class="secondary-button edit-button">Modifier</button>
+            <button class="danger-button delete-button">Supprimer</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
