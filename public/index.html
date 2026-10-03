@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manwha Rank</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">Manwha Rank</div>
+        <div class="topbar-actions">
+          <button id="loginToggle" type="button">Connexion</button>
+          <button id="logoutButton" class="hidden" type="button">Déconnexion</button>
+        </div>
+      </header>
+
+      <aside id="loginPanel" class="panel hidden">
+        <h2>Connexion</h2>
+        <form id="loginForm">
+          <label>
+            <span>Nom d'utilisateur</span>
+            <input type="text" name="username" autocomplete="username" />
+          </label>
+          <label>
+            <span>Mot de passe</span>
+            <input type="password" name="password" autocomplete="current-password" />
+          </label>
+          <button type="submit">Se connecter</button>
+        </form>
+      </aside>
+
+      <section class="stats-wrap">
+        <div class="stat-card">
+          <span class="stat-label">Lecture</span>
+          <strong id="statLecture">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Abandon</span>
+          <strong id="statAbandon">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Analyse</span>
+          <strong id="statAnalyse">0</strong>
+        </div>
+      </section>
+
+      <section id="adminPanel" class="panel hidden">
+        <div class="admin-header">
+          <h2>Espace admin</h2>
+          <span id="adminBadge" class="admin-badge">Visiteur</span>
+        </div>
+
+        <form id="manhwaForm" class="stack-form">
+          <input type="hidden" id="manhwaId" value="" />
+
+          <div class="field-grid">
+            <label>
+              <span>Titre</span>
+              <input id="titleInput" type="text" name="title" required />
+            </label>
+
+            <label>
+              <span>Genre</span>
+              <input id="genreInput" type="text" name="genre" value="Autre" />
+            </label>
+
+            <label>
+              <span>Chapitre</span>
+              <input id="chapterInput" type="number" name="chapter_count" value="0" min="0" />
+            </label>
+
+            <label>
+              <span>Statut</span>
+              <select id="statusInput" name="status">
+                <option value="reading">Lecture</option>
+                <option value="upcoming">À venir</option>
+                <option value="finished">Terminé</option>
+                <option value="analysis_under_30">Analyse -30 chapitres</option>
+                <option value="to_analyze">À analyser</option>
+                <option value="missing">Introuvable</option>
+                <option value="abandoned_translation">Abandon team trad</option>
+                <option value="abandoned_creator">Abandon créateur</option>
+                <option value="abandoned_manual">Abandon manuel</option>
+              </select>
+            </label>
+
+            <label class="full-width">
+              <span>Image de couverture</span>
+              <input id="coverInput" type="url" name="cover_image" placeholder="https://..." />
+            </label>
+
+            <label class="full-width">
+              <span>Description</span>
+              <textarea id="descriptionInput" name="description" rows="3"></textarea>
+            </label>
+
+            <label class="full-width">
+              <span>Notes</span>
+              <textarea id="notesInput" name="notes" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button id="submitManhwaBtn" type="submit">Ajouter</button>
+            <button id="cancelEditBtn" type="button" class="secondary-button">Annuler</button>
+          </div>
+        </form>
+
+        <form id="userForm" class="stack-form">
+          <h3>Créer un compte</h3>
+          <label>
+            <span>Nom</span>
+            <input id="newUserName" type="text" name="username" required />
+          </label>
+          <label>
+            <span>Mot de passe</span>
+            <input id="newUserPassword" type="password" name="password" required />
+          </label>
+          <label>
+            <span>Rôle</span>
+            <select id="newUserRole" name="role">
+              <option value="editor">Éditeur</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+          <button type="submit">Créer le compte</button>
+        </form>
+      </section>
+
+      <section class="filters">
+        <div id="filterChips" class="chip-list"></div>
+      </section>
+
+      <main>
+        <div id="manhwaBoard"></div>
+      </main>
+    </div>
+
+    <template id="cardTemplate"></template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
